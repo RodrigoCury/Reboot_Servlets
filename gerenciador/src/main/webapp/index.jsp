@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Servlets</title>
 </head>
-<body>
+<body style='background: #333; color: white;'>
 	Index
 </body>
 </html>
