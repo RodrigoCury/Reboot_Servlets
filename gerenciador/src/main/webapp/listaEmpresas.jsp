@@ -38,6 +38,6 @@
 			</ul>	
 		</c:if>	
 	</c:if>
-	<a href='<c:url value="/novaEmpresa"/>'>Cadastrar nova Empresa</a>
+	<a href='<c:url value="entrada?acao=NovaEmpresa"/>'>Cadastrar nova Empresa</a>
 </body>
 </html>
