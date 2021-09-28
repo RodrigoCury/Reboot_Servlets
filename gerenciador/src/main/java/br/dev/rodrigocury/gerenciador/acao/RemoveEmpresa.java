@@ -9,13 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import br.dev.rodrigocury.gerenciador.models.Banco;
 
 public class RemoveEmpresa {
-	public static void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public static String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = (String) request.getParameter("id");
 		Integer idInt = Integer.valueOf(id);
 		
-		Banco.remove(idInt);
+		boolean removed = Banco.remove(idInt);
 		
-		response.sendRedirect("entrada?acao=ListaEmpresas");
+		if(removed) {
+			return "redirect:entrada?acao=ListaEmpresas";			
+		}
 		
+		return "error:404";
+				
 	}
 }

@@ -2,7 +2,6 @@ package br.dev.rodrigocury.gerenciador.acao;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,46 +10,44 @@ import br.dev.rodrigocury.gerenciador.models.Banco;
 import br.dev.rodrigocury.gerenciador.models.Empresa;
 
 public class MostraEmpresa {
-	public static void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public static String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		switch (request.getMethod()) {
 			case "POST":
-				post(request, response);
-				break;
+				return post(request, response);			
 			case "GET":
-				get(request, response);
-				break;
+				return get(request, response);
 			default:
-				response.sendError(405);
+				return "error:405";
 		}
 	}
 	
-	private static void get(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private static String get(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String id = (String) request.getParameter("id");
 		Integer idInt = Integer.valueOf(id);
 		
 		Empresa empresa = Banco.getEmpresa(idInt);
 		if (empresa == null) {
-			response.sendRedirect("listaEmpresas");
-			return;
+			return "error:404";			
 		}
 		
 		request.setAttribute("empresa", empresa);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/alteraEmpresa.jsp");
+		return "forward:/WEB-INF/view/alteraEmpresa.jsp";
 		
-		rd.forward(request, response);
 	}
 	
-	private static void post(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private static String post(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String nomeAlterado = request.getParameter("nome");
 		String id = (String) request.getParameter("id");
 		Integer idInt = Integer.valueOf(id);
 		
 		Empresa empresa = Banco.getEmpresa(idInt);
-		if (empresa != null & nomeAlterado != "") {
-			empresa.setNome(nomeAlterado);
+		if (empresa == null | nomeAlterado == "") {
+			return "error:400";
 		}
 		
-		response.sendRedirect("listaEmpresas");
+		empresa.setNome(nomeAlterado);
+		
+		return "redirect:entrada?acao=ListaEmpresas";
 	}
 }

@@ -10,25 +10,22 @@ import br.dev.rodrigocury.gerenciador.models.Banco;
 import br.dev.rodrigocury.gerenciador.models.Empresa;
 
 public class NovaEmpresa {
-	public static void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public static String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		switch (request.getMethod()) {
 			case "POST":
-				post(request, response);
-				break;
+				return post(request, response);
 			case "GET":
-				get(request, response);
-				break;
+				return get(request, response);
 			default:
-				response.sendError(405);
+				return "error:405";
 		}
 	}
 
-	private static void get(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect("novaEmpresa.jsp");
-		
+	private static String get(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		return "redirect:WEB-INF/view/novaEmpresa.jsp";	
 	}
 
-	private static void post(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private static String post(HttpServletRequest request, HttpServletResponse response) {
 		try{	
 			Empresa novaEmpresa = new Empresa(request.getParameter("nome"));
 
@@ -36,12 +33,9 @@ public class NovaEmpresa {
 			
 			request.setAttribute("empresa", novaEmpresa);
 		} catch (Exception e) {
-			e.getStackTrace();
-			request.setAttribute("error", true);
-			
-		} finally {
-			response.sendRedirect("entrada?acao=ListaEmpresas");
+			return "error:400";
 		}
-		
+	
+		return "forward:/entrada?acao=ListaEmpresas";
 	}
 }

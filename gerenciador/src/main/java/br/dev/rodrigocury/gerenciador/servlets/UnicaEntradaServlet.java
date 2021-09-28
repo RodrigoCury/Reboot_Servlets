@@ -1,6 +1,8 @@
 package br.dev.rodrigocury.gerenciador.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,38 +20,67 @@ import br.dev.rodrigocury.gerenciador.acao.RemoveEmpresa;
 @WebServlet("/entrada")
 public class UnicaEntradaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UnicaEntradaServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String acaoParam = request.getParameter("acao");
-		
+	public UnicaEntradaServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String acaoParam = request.getParameter("acao") != null ? request.getParameter("acao") : "";
+
+		String actionResponse = null;
 		switch (acaoParam) {
-			case "ListaEmpresas":
-				ListaEmpresas.executa(request, response);
-				break;
-			case "MostraEmpresa":
-				MostraEmpresa.executa(request, response);
-				break;
-			case "RemoveEmpresa":
-				RemoveEmpresa.executa(request, response);
-				break;
-			case "NovaEmpresa":
-				NovaEmpresa.executa(request, response);
-				break;
-			default:
-				response.sendError(404);
+		case "ListaEmpresas":
+			actionResponse = ListaEmpresas.executa(request, response);
+			break;
+		case "MostraEmpresa":
+			actionResponse = MostraEmpresa.executa(request, response);
+			break;
+		case "RemoveEmpresa":
+			actionResponse = RemoveEmpresa.executa(request, response);
+			break;
+		case "NovaEmpresa":
+			actionResponse = NovaEmpresa.executa(request, response);
+			break;
+		default:
+			System.out.println("HERE");
+			actionResponse = "error:404";
 		}
+
+		String[] respELocalizacao = actionResponse.split(":");
+
+		String action = respELocalizacao[0];
+		String command = respELocalizacao[1];
+
+		switch (action) {
+		case "forward":
+			RequestDispatcher rd = request.getRequestDispatcher(command);
+			rd.forward(request, response);
+			break;
+		case "redirect":
+			response.sendRedirect(command);
+			break;
+		case "error":
+			response.sendError(Integer.parseInt(command));
+			break;
+		default:
+			// Fazer LOG de erros
+			System.out.println("Erro Interno");
+			System.out.println(action + " " + command);
+			response.sendError(500);
+
+		}
+
 	}
 
 }
