@@ -3,7 +3,6 @@ package br.dev.rodrigocury.gerenciador.servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,7 @@ import br.dev.rodrigocury.gerenciador.models.Empresa;
 /**
  * Servlet implementation class NovaEmpresaServlest
  */
-@WebServlet(urlPatterns = "/novaEmpresa")
+//@WebServlet(urlPatterns = "/novaEmpresa")
 public class NovaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
