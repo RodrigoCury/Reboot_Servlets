@@ -11,6 +11,9 @@
 	<form action="<c:url value="/entrada?acao=NovaEmpresa" />" method='POST' style="display: flex; flex-direction: column;  height: 100px; justify-content: space-around; align-items: center;">
 		<label for="nome">Nome da Empresa:</label>
 		<input type="text" name="nome" id="nome" />
+		<c:if test="${not empty error}">
+			<label for="nome" style="color: red;">${error}</label>
+		</c:if>
 		<button type='submit'>Enviar</button>
 	</form>
 </body>
