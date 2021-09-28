@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import br.dev.rodrigocury.gerenciador.models.Banco;
 import br.dev.rodrigocury.gerenciador.models.Empresa;
 
-public class MostraEmpresa {
-	public static String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class MostraEmpresa  implements Acao{
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		switch (request.getMethod()) {
 			case "POST":
 				return post(request, response);			

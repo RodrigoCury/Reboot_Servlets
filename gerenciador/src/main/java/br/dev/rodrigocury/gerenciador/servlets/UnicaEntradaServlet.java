@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.dev.rodrigocury.gerenciador.acao.ListaEmpresas;
-import br.dev.rodrigocury.gerenciador.acao.MostraEmpresa;
-import br.dev.rodrigocury.gerenciador.acao.NovaEmpresa;
-import br.dev.rodrigocury.gerenciador.acao.RemoveEmpresa;
+import br.dev.rodrigocury.gerenciador.acao.Acao;
 
 /**
  * Servlet implementation class UnicaEntradaServlet
@@ -39,23 +36,14 @@ public class UnicaEntradaServlet extends HttpServlet {
 		String acaoParam = request.getParameter("acao") != null ? request.getParameter("acao") : "";
 
 		String actionResponse = null;
-		switch (acaoParam) {
-		case "ListaEmpresas":
-			actionResponse = ListaEmpresas.executa(request, response);
-			break;
-		case "MostraEmpresa":
-			actionResponse = MostraEmpresa.executa(request, response);
-			break;
-		case "RemoveEmpresa":
-			actionResponse = RemoveEmpresa.executa(request, response);
-			break;
-		case "NovaEmpresa":
-			actionResponse = NovaEmpresa.executa(request, response);
-			break;
-		default:
-			System.out.println("HERE");
+		
+		try {
+			Class<?> classe = Class.forName("br.dev.rodrigocury.gerenciador.acao."+acaoParam);
+			Acao obj = (Acao) classe.getDeclaredConstructor().newInstance();
+			actionResponse = obj.executa(request, response);
+		} catch (Exception e) {
 			actionResponse = "error:404";
-		}
+		}		
 
 		String[] respELocalizacao = actionResponse.split(":");
 
@@ -76,7 +64,7 @@ public class UnicaEntradaServlet extends HttpServlet {
 		default:
 			// Fazer LOG de erros
 			System.out.println("Erro Interno");
-			System.out.println(action + " " + command);
+			System.out.println(acaoParam + "  " + action + " " + command);
 			response.sendError(500);
 
 		}

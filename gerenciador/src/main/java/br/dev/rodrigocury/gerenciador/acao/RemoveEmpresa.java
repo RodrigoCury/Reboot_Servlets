@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.dev.rodrigocury.gerenciador.models.Banco;
 
-public class RemoveEmpresa {
-	public static String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class RemoveEmpresa  implements Acao{
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = (String) request.getParameter("id");
 		Integer idInt = Integer.valueOf(id);
 		

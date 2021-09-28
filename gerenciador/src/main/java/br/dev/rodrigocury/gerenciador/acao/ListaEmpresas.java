@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.dev.rodrigocury.gerenciador.models.Banco;
 
-public class ListaEmpresas {
+public class ListaEmpresas implements Acao{
 	
-	public static String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("empresas", Banco.getEmpresas());
 		
 		return "forward:/WEB-INF/view/listaEmpresas.jsp";
