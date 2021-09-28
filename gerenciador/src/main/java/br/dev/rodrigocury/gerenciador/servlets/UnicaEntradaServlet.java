@@ -42,6 +42,7 @@ public class UnicaEntradaServlet extends HttpServlet {
 			Acao obj = (Acao) classe.getDeclaredConstructor().newInstance();
 			actionResponse = obj.executa(request, response);
 		} catch (Exception e) {
+			System.out.println(acaoParam);
 			actionResponse = "error:404";
 		}		
 
