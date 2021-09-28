@@ -38,7 +38,7 @@ public class Banco {
 		return lista.size();
 	}
 
-	public static void remove(Integer id) {
+	public static boolean remove(Integer id) {
 		Iterator<Empresa> it = lista.iterator();
 		
 		while(it.hasNext()) {
@@ -46,9 +46,11 @@ public class Banco {
 			
 			if(empresa.getId() == id) {				
 				it.remove();
-				break;
+				return true;
 			}
 		}
+		
+		return false;
 	}
 	
 	public static Empresa getEmpresa(Integer id) {
