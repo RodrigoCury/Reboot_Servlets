@@ -47,11 +47,9 @@ public class MostraEmpresa {
 		Integer idInt = Integer.valueOf(id);
 		
 		Empresa empresa = Banco.getEmpresa(idInt);
-		if (empresa == null | nomeAlterado == "") {
-			response.sendRedirect("listaEmpresas");
-			return;
+		if (empresa != null & nomeAlterado != "") {
+			empresa.setNome(nomeAlterado);
 		}
-		empresa.setNome(nomeAlterado);
 		
 		response.sendRedirect("listaEmpresas");
 	}
