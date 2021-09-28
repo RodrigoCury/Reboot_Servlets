@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body style='background: #333; color: white;'>
-	<form action="<c:url value="/mostraEmpresa?id=${empresa.id}" />" method='POST' style="display: flex; flex-direction: column;  height: 100px; justify-content: space-around; align-items: center;">
+	<form action="<c:url value="/entrada?acao=MostraEmpresa&id=${empresa.id}" />" method='POST' style="display: flex; flex-direction: column;  height: 100px; justify-content: space-around; align-items: center;">
 		<label for="nome">Nome da Empresa:</label>
 		<input type="text" name="nome" id="nome" value="${empresa.nome }"/>
 		<button type='submit'>Enviar</button>

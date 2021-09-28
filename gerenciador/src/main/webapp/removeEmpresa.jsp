@@ -8,7 +8,7 @@
 <title>Deleta Empresa</title>
 </head>
 <body style='background: #333; color: white;'>
-	<form action="<c:url value="/removeEmpresa" />" method='POST' style="display: flex; flex-direction: column;  height: 100px; justify-content: space-around; align-items: center;">
+	<form action="<c:url value="/entrada?acao=RemoveEmpresa" />" method='POST' style="display: flex; flex-direction: column;  height: 100px; justify-content: space-around; align-items: center;">
 		<label for="id">ID da Empresa:</label>
 		<input type="number" min="1" name="id" id="id" />
 		<button type='submit'>Enviar</button>

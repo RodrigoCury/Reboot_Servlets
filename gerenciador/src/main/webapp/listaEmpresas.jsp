@@ -31,8 +31,8 @@
 				<c:forEach items="${empresas}" var="empresa">
 					<li style="width: 150px; display: flex; flex-direction: row; justify-content: space-between;">
 						${empresa.nome }@${empresa.id} 
-						<a href="<c:url value='/removeEmpresa?id=${empresa.id}'/>">x</a>
-						<a href="<c:url value='/mostraEmpresa?id=${empresa.id}'/>">Editar</a>
+						<a href="<c:url value='/entrada?acao=RemoveEmpresa&id=${empresa.id}'/>">x</a>
+						<a href="<c:url value='/entrada?acao=MostraEmpresa&id=${empresa.id}'/>">Editar</a>
 					</li>
 				</c:forEach>
 			</ul>	
