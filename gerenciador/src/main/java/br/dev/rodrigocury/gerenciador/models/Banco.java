@@ -8,6 +8,7 @@ import java.util.List;
 import javax.naming.directory.InvalidAttributesException;
 
 public class Banco {
+	private static List<Usuario> listaUsuarios = new ArrayList<Usuario>();
 	private static List<Empresa> lista = new ArrayList<Empresa>();
 	private static Integer chaveSequencial = 1;
 	
@@ -15,9 +16,29 @@ public class Banco {
 	static {
 		try {
 			Banco.add(new Empresa("Google"),new Empresa("Alura"),new Empresa("Caellum"));
+			Banco.add(new Usuario("Rodrigo", "1234"), new Usuario("Luigi", "1234"));
 		} catch (InvalidAttributesException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void add(Usuario usuario) {
+		listaUsuarios.add(usuario);
+	}
+	
+	public static void add(Usuario ...usuario) {
+		List.of(usuario).forEach(Banco::add);
+	}
+	
+	public static boolean autentica(String login, String senha) {
+		Iterator<Usuario> it = listaUsuarios.iterator();
+		
+		while (it.hasNext()) {
+			if(it.next().autentica(login, senha)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
