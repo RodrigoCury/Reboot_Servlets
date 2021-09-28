@@ -1,4 +1,4 @@
-package br.dev.rodrigocury.models;
+package br.dev.rodrigocury.gerenciador.models;
 
 import java.util.ArrayList;
 import java.util.Collections;

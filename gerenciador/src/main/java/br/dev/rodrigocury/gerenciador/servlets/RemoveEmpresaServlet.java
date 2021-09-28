@@ -1,4 +1,4 @@
-package br.dev.rodrigocury.gerenciador;
+package br.dev.rodrigocury.gerenciador.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.dev.rodrigocury.models.Banco;
+import br.dev.rodrigocury.gerenciador.models.Banco;
 
 /**
  * Servlet implementation class RemoveEmpresaDoBanco

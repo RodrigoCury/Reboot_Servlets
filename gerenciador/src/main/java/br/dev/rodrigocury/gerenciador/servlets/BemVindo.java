@@ -1,4 +1,4 @@
-package br.dev.rodrigocury.gerenciador;
+package br.dev.rodrigocury.gerenciador.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
