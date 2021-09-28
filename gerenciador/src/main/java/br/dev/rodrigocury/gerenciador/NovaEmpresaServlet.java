@@ -2,7 +2,6 @@ package br.dev.rodrigocury.gerenciador;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,11 +34,18 @@ public class NovaEmpresaServlet extends HttpServlet {
 			request.setAttribute("error", true);
 			
 		} finally {
+//			
+//			RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
+//			rd.forward(request, response);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/empresaCadastrada.jsp");
-			rd.forward(request, response);
-			
+			response.sendRedirect("listaEmpresas");
 		}
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		resp.sendRedirect("novaEmpresa.jsp");
 	}
 
 }
