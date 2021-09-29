@@ -5,8 +5,10 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.dev.rodrigocury.gerenciador.models.Banco;
+import br.dev.rodrigocury.gerenciador.models.Usuario;
 
 public class Login implements Acao {
 
@@ -26,12 +28,15 @@ public class Login implements Acao {
 	private String post(HttpServletRequest request, HttpServletResponse response) {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		boolean autenticado = Banco.autentica(login, senha);
+		Usuario autenticado = Banco.autentica(login, senha);
 		
-		if (!autenticado) {
+		if (autenticado == null) {
 			request.setAttribute("error", "Login ou Senha Incorretos");
 			return get(request, response);
 		}
+		
+		HttpSession sessao = request.getSession();
+		sessao.setAttribute("usuarioLogado", autenticado);
 		
 		return "redirect:entrada?acao=ListaEmpresas";
 	}

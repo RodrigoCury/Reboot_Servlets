@@ -10,6 +10,18 @@
 </head>
 <body style='background: #333; color: white; display: flex; flex-direction: column;' >
 
+
+	<c:if test="${not empty usuarioLogado }">
+		<div style="display: flex; flex-direction: row; justify-content: space-around;">
+			<h3>Usuário Logado: ${usuarioLogado.login }</h3>
+			<a href='<c:url value="entrada?acao=Logout"/>'>Logout</a>
+		</div>
+		
+	</c:if>
+	<c:if test="${empty usuarioLogado }">
+		<a href='<c:url value="/entrada?acao=Login" />'>Login</a>
+	</c:if>
+
 	<c:if test="${error == true}">
 		<h2>Houve um erro</h2>
 	</c:if>

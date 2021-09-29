@@ -16,7 +16,7 @@ public class Banco {
 	static {
 		try {
 			Banco.add(new Empresa("Google"),new Empresa("Alura"),new Empresa("Caellum"));
-			Banco.add(new Usuario("Rodrigo", "1234"), new Usuario("Luigi", "1234"));
+			Banco.add(new Usuario("RodrigoCury", "1234"), new Usuario("Luigi", "1234"));
 		} catch (InvalidAttributesException e) {
 			e.printStackTrace();
 		}
@@ -30,15 +30,13 @@ public class Banco {
 		List.of(usuario).forEach(Banco::add);
 	}
 	
-	public static boolean autentica(String login, String senha) {
-		Iterator<Usuario> it = listaUsuarios.iterator();
-		
-		while (it.hasNext()) {
-			if(it.next().autentica(login, senha)) {
-				return true;
-			}
+	public static Usuario autentica(String login, String senha) {
+		for (Usuario usuario: listaUsuarios) {
+			if(usuario.autentica(login, senha))
+				return usuario;
 		}
-		return false;
+		return null;
+		
 	}
 	
 	
