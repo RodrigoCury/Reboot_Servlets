@@ -27,8 +27,9 @@ public class NovaEmpresa  implements Acao{
 
 	private static String post(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try{	
-			Empresa novaEmpresa = new Empresa(request.getParameter("nome"));
-
+			
+			Empresa novaEmpresa = new Empresa((String) request.getParameter("nome"));
+			
 			Banco.add(novaEmpresa);
 			
 			request.setAttribute("empresa", novaEmpresa);
@@ -37,6 +38,6 @@ public class NovaEmpresa  implements Acao{
 			return get(request, response);
 		}
 	
-		return "forward:/entrada?acao=ListaEmpresas";
+		return "redirect:entrada?acao=ListaEmpresas";
 	}
 }

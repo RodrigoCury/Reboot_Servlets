@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>gerenciador</display-name>
-  <welcome-file-list>
-    <welcome-file>bem-vindo.jsp</welcome-file>
-  </welcome-file-list>
-  	  <filter>
-  	<filter-name>Monitoramento</filter-name>
-  	<filter-class>br.dev.rodrigocury.gerenciador.filters.MonitoramentoFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>Monitoramento</filter-name>
-    <url-pattern>/entrada</url-pattern>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/j2ee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+	<display-name>gerenciador</display-name>
+	<welcome-file-list>
+		<welcome-file>bem-vindo.jsp</welcome-file>
+	</welcome-file-list>
+	<filter>
+		<filter-name>Monitoramento</filter-name>
+		<filter-class>br.dev.rodrigocury.gerenciador.filters.MonitoramentoFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Monitoramento</filter-name>
+		<url-pattern>/entrada</url-pattern>
 	</filter-mapping>
-  <filter>
-  	<filter-name>Auth</filter-name>
-  	<filter-class>br.dev.rodrigocury.gerenciador.filters.AutorizacaoFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>Auth</filter-name>
-    <url-pattern>/entrada</url-pattern>
+	<filter>
+		<filter-name>Auth</filter-name>
+		<filter-class>br.dev.rodrigocury.gerenciador.filters.AutorizacaoFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Auth</filter-name>
+		<url-pattern>/entrada</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>Controller</filter-name>
+		<filter-class>br.dev.rodrigocury.gerenciador.filters.ControladorFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Controller</filter-name>
+		<url-pattern>/entrada</url-pattern>
 	</filter-mapping>
 </web-app>
